@@ -10,7 +10,7 @@ from django.db.models import Count
 from myapp.models import RecordAnime, AnimeTag, Tag
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from django.utils import timezone  # ⭐️ 新增导入
+from django.utils import timezone  
 
 
 # def more(request):
@@ -55,7 +55,7 @@ def get_tag_stats(request):
     return JsonResponse({"chart_data": chart_data})  # 返回标准JSON
 
 
-# 我发现页码部分会非常多，似乎是把所有的页码按钮都显示了，我希望每个页面中的页码只有前一页/当前页的前后范围5页/最后一页，还能使用Paginator的功能做到吗，该怎么更改代码，指出更改的位置和更改的方法。
+
 
 
 def more(request):
