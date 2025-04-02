@@ -1,0 +1,164 @@
+ /*.tag-item.active {*/
+ /*       background-color: #0d6efd;*/
+ /*       color: white !important;*/
+ /*   }*/
+ /*   #searchSuggestions {*/
+ /*       z-index: 1000;*/
+ /*       max-height: 200px;*/
+ /*       overflow-y: auto;*/
+ /*   }*/
+
+
+
+ /* 标签选择样式 */
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-item {
+    transition: all 0.2s ease;
+    border-radius: 15px;
+}
+
+.tag-item.active {
+    background-color: rgba(182, 100, 178, 0.9) !important;
+    color: white !important;
+    transform: scale(1.05);
+}
+
+.selected-tags {
+    min-height: 40px;
+    background-color: #f8f9fa;
+}
+
+#searchSuggestions {
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.search-suggestion-item:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+/* style_filter.css 补充 */
+.tag-item.btn {
+    padding: 4px 12px;
+    border: 1px solid #dee2e6;
+    transition: all 0.2s ease;
+}
+
+
+/* style_filter.css 添加 */
+.selected-counter {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #6c757d;
+    padding: 4px 8px;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    border: 1px solid #dee2e6;
+}
+
+.selected-tags {
+    position: relative;  /* 确保计数器定位正确 */
+    padding: 8px;
+    border-radius: 8px;
+}
+
+
+
+/* 在style_filter.css中添加 */
+.time-filter {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.time-filter label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.time-display {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    background-color: rgba(13, 110, 253, 0.1) !important;
+    color: #1a0106 !important;
+}
+
+input[type="month"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
+}
+
+
+
+
+
+
+/*分数选择*/
+/* 添加评分组件样式 */
+.rating-filter {
+    background-color: #fff;
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 2px solid rgba(68, 85, 245, 0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.rating-filter:hover {
+    border-color: rgba(13, 110, 253, 0.25);
+}
+
+.rating-range-picker input[type="number"] {
+    border-color: rgba(13, 110, 253, 0.2);
+    font-weight: 500;
+    -moz-appearance: textfield; /* 隐藏数字输入框箭头 */
+}
+
+.rating-range-picker input[type="number"]::-webkit-outer-spin-button,
+.rating-range-picker input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* 隐藏Webkit箭头 */
+}
+
+.input-group button {
+    width: 40px;
+    transition: all 0.2s ease;
+}
+
+.input-group button:hover {
+    background-color: rgba(13, 110, 253, 0.1);
+    border-color: rgba(13, 110, 253, 0.3);
+}
+
+.rating-display {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    background-color: rgba(46, 232, 88, 0.73) ;
+    color: #8eef6d !important;
+}
+
+
+/* 排序选项样式 */
+.sort-options {
+    transition: all 0.3s ease;
+    background-color: #f8f9fa !important;
+}
+
+.sort-options h6 {
+    font-weight: 500;
+    color: #495057;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 0.5rem;
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}

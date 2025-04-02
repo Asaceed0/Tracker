@@ -1,0 +1,178 @@
+/*导航以及占位*/
+
+/*导航条*/
+
+/* 自定义导航条样式 */
+.custom-navbar {
+    background: rgba(0, 0, 0, 0.85) !important; /* 半透明黑色背景 */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease; /* 过渡动画 */
+}
+
+/* 滚动时变化效果 */
+.custom-navbar.scrolled {
+    background: rgba(0, 0, 0, 0.95) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 导航项悬停效果 */
+.nav-link {
+    position: relative;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* 自定义搜索框 */
+.search-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #a318a8 !important;
+
+}
+
+.search-box::placeholder {
+    color: rgba(172, 21, 122, 0.6) !important;
+}
+
+/* 移动端优化 */
+@media (max-width: 992px) {
+    .custom-navbar {
+        background: rgba(0, 0, 0, 0.95) !important;
+    }
+
+    .dropdown-menu {
+        background: rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* 用户信息块样式  避免覆盖作用*/
+.user-profile-wrapper {
+    margin-top: 80px; /* 与导航条保持间距 */
+    background: #fff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+/* 推荐区块样式 */
+.recommend-section {
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recommend-list {
+    display: flex;
+    overflow-x: auto;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    gap: 15px;
+}
+
+.recommend-item {
+    flex: 0 0 120px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* 弹性过渡曲线 */
+}
+
+
+
+
+
+/*.recommend-name {*/
+/*    font-size: 0.9rem;*/
+/*    margin-top: 8px;*/
+/*    color: #333;*/
+/*    */
+/*}*/
+.recommend-name {
+    font-size: 0.9rem;
+    margin-top: 8px;
+    color: #333;
+    /* 新增样式 */
+    max-width: 100%; /* 限制最大宽度为容器宽度 */
+    text-align: left; /* 强制左对齐 */
+    word-wrap: break-word; /* 允许长单词换行 */
+    white-space: normal; /* 确保换行行为正常 */
+    padding: 0 2px; /* 可选，避免边缘文字贴边 */
+}
+
+.recommend-item:hover {
+    transform: translateY(-8px); /* 上浮8像素 */
+    box-shadow: 0 12px 20px rgba(0,0,0,0.2); /* 更强烈的阴影 */
+}
+
+.recommend-item:hover .recommend-name {
+    font-weight: 700 !important; /* 加粗字体 */
+    color: #ff4500 !important; /* 橙红色 (#ff4500=经典橙红) */
+    text-shadow: 0 2px 4px rgba(255,69,0,0.1); /* 文字投影增强立体感 */
+}
+
+/* 图表区块样式 */
+.chart-box {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    padding: 15px;
+}
+
+.text-purple {
+    color: #6f42c1;
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    .recommend-item {
+        flex: 0 0 100px;
+    }
+
+    .recommend-img {
+        width: 100px;
+        height: 140px;
+    }
+
+    .chart-img {
+        height: 200px;
+    }
+}
+
+#tagChart {
+    min-height: 350px; /* 增加容器高度 */
+    padding: 15px; /* 增加内边距 */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

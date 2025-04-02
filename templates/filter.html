@@ -1,0 +1,233 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}<title>筛选器</title>{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static "css/style_filter.css" %}">
+{% endblock %}
+
+{% block context %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom-navbar">
+        <div class="container"> <!-- 保持与内容容器宽度一致 -->
+            <!-- 品牌Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="{% static "img/sign/logoA.png" %}" width="30" height="30" class="d-inline-block align-top"
+                     alt="">
+                作品平台
+            </a>
+
+            <!-- 汉堡菜单按钮（移动端显示） -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- 导航项 -->
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav mr-auto">
+                    <!-- 带下拉菜单的导航项 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tags">随机推荐</a>
+                    </li>
+
+                    <!-- 普通导航项 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tags">标签云</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analysis">喜好分析</a>
+                    </li>
+                </ul>
+
+                <!-- 右侧功能区 -->
+                {#                <form class="form-inline my-2 my-lg-0">#}
+                {#                    <input class="form-control search-box" type="search" placeholder="搜索作品...">#}
+                {#                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">搜索</button>#}
+                {#                </form>#}
+                <form class="form-inline my-2 my-lg-0" action="/search">
+                    <input class="form-control search-box bg-white"
+                           name="q"
+                           type="search"
+                           placeholder="搜索作品..."
+                           value="{{ search_query|default:'' }}">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">搜索</button>
+                </form>
+                <!-- 用户相关导航 -->
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                        <!-- 用户头像及下拉菜单 -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown">
+                                <img
+                                        src="
+
+
+
+
+
+
+                                                {% if user.userinfo.photo_url %}{{ user.userinfo.photo_url }}{% else %}{% static 'img/default_avatar.png' %}{% endif %}"
+                                        class="rounded-circle"
+                                        style="width: 32px; height: 32px; object-fit: cover;"
+                                >
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/home">个人主页</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'logout' %}?next={{ request.path }}">退出</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <!-- 未登录状态 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/sign">登录/注册</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="user-profile-wrapper">
+        <div class="container">
+            <!-- 使用相同container保证对齐 -->
+        </div>
+    </div>
+    <div class="container mt-5 pt-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title mb-3">热门标签</h5>
+
+                <div class="selected-tags mb-3 p-2 border rounded">
+                    <small class="text-muted">已选择标签：</small>
+                    <div id="selectedTagsContainer" class="d-inline"></div>
+                </div>
+
+                <!-- 使用真实标签数据 -->
+                <div class="tag-cloud mb-4">
+                    {% for tag in hot_tags %}
+                        <button type="button"
+                                class="btn btn-outline-primary btn-sm tag-item m-1"
+                                data-tag-id="{{ tag.tag_id }}">
+                            {{ tag.tag_name }}
+                        </button>
+                    {% endfor %}
+                </div>
+
+                <div class="tag-search position-relative">
+                    <input type="text"
+                           class="form-control"
+                           id="tagSearchInput"
+                           placeholder="输入标签名称..."
+                           autocomplete="off">
+                    <div id="searchSuggestions" class="list-group d-none"></div>
+                    <div id="noMatchAlert" class="alert alert-warning mt-2 mb-0 d-none">无匹配标签</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="time-filter mt-4">
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="allTimeCheck" checked>
+                    <label class="form-check-label" for="allTimeCheck">全部时间范围</label>
+                </div>
+            </div>
+
+            <div class="row g-3" id="timeRangePicker" style="display: none;">
+                <div class="col-md-6">
+                    <label class="form-label">开始时间</label>
+                    <input type="month" class="form-control start-month"
+                           min="1970-01"
+                           :max="currentMonth">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">结束时间</label>
+                    <input type="month" class="form-control end-month"
+                           min="1970-01"
+                           :max="currentMonth">
+                </div>
+                <div class="col-12">
+                    <div class="time-display badge bg-info mt-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rating-filter mt-4">
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="allRatingCheck" checked>
+                    <label class="form-check-label" for="allRatingCheck">全部评分范围</label>
+                </div>
+            </div>
+
+            <div class="rating-range-picker" id="ratingRangePicker" style="display: none;">
+                <div class="row g-3">
+                    <!-- 最低评分 -->
+                    <div class="col-md-6">
+                        <label class="form-label">最低评分</label>
+                        <div class="input-group">
+                            <button class="btn btn-outline-secondary" type="button" id="minMinus">-</button>
+                            <input type="number" id="minRating"
+                                   class="form-control text-center"
+                                   min="0" max="10" step="0.1" value="0">
+                            <button class="btn btn-outline-secondary" type="button" id="minPlus">+</button>
+                        </div>
+                    </div>
+
+                    <!-- 最高评分 -->
+                    <div class="col-md-6">
+                        <label class="form-label">最高评分</label>
+                        <div class="input-group">
+                            <button class="btn btn-outline-secondary" type="button" id="maxMinus">-</button>
+                            <input type="number" id="maxRating"
+                                   class="form-control text-center"
+                                   min="0" max="10" step="0.1" value="10">
+                            <button class="btn btn-outline-secondary" type="button" id="maxPlus">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="rating-display badge bg-primary"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 排序选项 -->
+        <div class="sort-options mb-4 p-3 bg-light rounded border"  style="margin-top: 20px">
+            <h6 class="mb-3">排序方式</h6>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sortOption" id="sortByTime"
+                       value="time" checked>
+                <label class="form-check-label" for="sortByTime">
+                    按时间排序
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sortOption" id="sortByRating"
+                       value="rating">
+                <label class="form-check-label" for="sortByRating">
+                    按评分排序
+                </label>
+            </div>
+        </div>
+
+        <!-- 原筛选按钮 -->
+
+
+        <div class="mt-4 d-flex justify-content-center" ">
+            <button class="btn btn-primary btn-lg" id="searchButton">
+                <i class="bi bi-search me-2"></i>开始筛选
+            </button>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static "js/filter.js" %}"></script>
+{% endblock %}
+
+

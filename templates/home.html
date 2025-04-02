@@ -1,0 +1,286 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{% block title %}
+    <title>个人首页</title>
+{% endblock %}
+
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/style_home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_more.css' %}">
+    <link rel="icon" href="{% static 'ico/home.png' %}">
+
+
+
+{% endblock %}
+
+
+{% block context %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom-navbar">
+        <div class="container"> <!-- 保持与内容容器宽度一致 -->
+            <!-- 品牌Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="{% static "img/sign/logoA.png" %}" width="30" height="30" class="d-inline-block align-top"
+                     alt="">
+                作品平台
+            </a>
+
+            <!-- 汉堡菜单按钮（移动端显示） -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- 导航项 -->
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav mr-auto">
+                    <!-- 带下拉菜单的导航项 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/filter">精确筛选</a>
+                    </li>
+
+                    <!-- 普通导航项 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tags">标签云</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analysis">喜好分析</a>
+                    </li>
+                </ul>
+
+                <!-- 右侧功能区 -->
+                {#                <form class="form-inline my-2 my-lg-0">#}
+                {#                    <input class="form-control search-box" type="search" placeholder="搜索作品...">#}
+                {#                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">搜索</button>#}
+                {#                </form>#}
+                <form class="form-inline my-2 my-lg-0" action="/search">
+                    <input class="form-control search-box bg-white"
+                           name="q"
+                           type="search"
+                           placeholder="搜索作品..."
+                           value="{{ search_query|default:'' }}">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">搜索</button>
+                </form>
+                <!-- 用户相关导航 -->
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                        <!-- 用户头像及下拉菜单 -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown">
+                                <img
+                                        src="
+                                                {% if user.userinfo.photo_url %}{{ user.userinfo.photo_url }}{% else %}{% static 'img/default_avatar.png' %}{% endif %}"
+                                        class="rounded-circle"
+                                        style="width: 32px; height: 32px; object-fit: cover;"
+                                >
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/home">个人主页</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'logout' %}?next={{ request.path }}">退出</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <!-- 未登录状态 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/sign">登录/注册</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="user-profile-wrapper">
+    <div class="container">
+        <div class="row" style="margin-top: 10px">
+            <!-- 左边作品列表 -->
+            <div class="col-md-8">
+                <!-- 分类块容器 -->
+                <div class="category-container">
+                    <!-- 单个分类块 -->
+                    <div class="category-block">
+                        <h3 class="category-title">动漫 <span class="badge badge-secondary">6</span></h3>
+                        <div class="works-list">
+
+                            <!-- 更多作品项... -->
+                            {% for item in items_anime %}
+                                <div class="work-item">
+                                    <a href="{{ item.anime.info_url }}"><img src="{{ item.anime.img_url }}"
+                                                                             class="work-thumb"></a>
+                                    <div class="work-info">
+                                        <!-- 标题块 -->
+                                        <div class="info-block title-block">
+                                            <a href="{{ item.anime.info_url }}"><h5>{{ item.anime.anime_name }}</h5></a>
+                                            <p class="text-muted">{{ item.anime.resume }}</p>
+                                        </div>
+
+                                        <!-- 评分块 -->
+                                        <div class="info-block rating-block">
+                                            <!-- 私人评分块 -->
+                                            <div class="rating-item private-rating">
+                                                <span>个人评分：</span>
+                                                <div class="stars" data-rating="{{ item.score_user }}" data-total="10">
+                                                    <div class="stars-container"></div>
+                                                    <span class="rating-text">8.5</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- 大众评分块 -->
+                                            <div class="rating-item public-rating">
+                                                <span>大众评分：</span>
+                                                <div class="stars" data-rating="{{ item.anime.score }}" data-total="10">
+                                                    <div class="stars-container"></div>
+                                                    <span class="rating-text">7.3</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 进度块 -->
+                                        <div class="info-block progress-block" data-step="{{ item.step }}"
+                                             data-total="{{ item.anime.total }}">
+                                            <div class="progress-label">
+                                                <span>观看进度</span>
+                                                <span class="progress-percent"></span>
+                                            </div>
+                                            <div class="progress-bar">
+
+                                                <div class="progress-fill" style="width: 100%">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 操作块 -->
+                                        <div class="info-block action-block">
+                                            <button class="btn btn-action" id="process-change"
+                                                    data-record-id= "{{ item.record_id }}"
+                                                    data-total = "{{ item.anime.total }}"
+
+
+                                            >修改进度
+                                            </button>
+                                            <button class="btn btn-action" id="rate-change"
+                                                    data-record-id= "{{ item.record_id }}"
+                                                    data-total = "{{ item.anime.total }}"
+                                            >修改评分
+                                            </button>
+                                            <button class="btn btn-action btn-danger"
+
+                                                    data-action="delete"
+                                                    data-record-id="{{ item.record_id }}"
+                                                    data-anime-id = "{{ item.anime.anime_id }}">
+                                                删除订阅
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- 右边订阅信息 -->
+            <div class="col-md-4">
+                <div class="subscription-box">
+                    <h4 class="side-title">最近订阅</h4>
+                    <ul class="subscription-list">
+                        {% for record in recently_record %}
+                            <li class="subscription-item">
+                                <a href="{{ record.info_url }}">
+                                    <span class="work-name">{{ record.anime_name }}</span>
+                                    <span class="subscribe-date">{{ record.record_date }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+
+
+                        <!-- 更多订阅项... -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    {#    修改进度模态框#}
+    <!-- 新增进度修改模态框 -->
+<div class="modal fade" id="progressModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">修改观看进度</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- 总集数提示 -->
+        <p class="text-muted">总集数：<span id="modal-total">0</span> 集</p>
+        <!-- 输入框 -->
+        <div class="form-group">
+          <label>当前进度：</label>
+          <input type="number" id="newStep" class="form-control"
+                 min="0"
+                 step="1">
+        </div>
+        <!-- 错误提示 -->
+        <div id="stepError" class="text-danger small"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="confirmStepChange">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{#    修改评分模态框#}
+    <!-- 新增评分修改模态框 -->
+
+<div class="modal fade" id="ratingModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">修改作品评分</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>当前评分（0-10分）：</label>
+          <input type="number" id="newRating" class="form-control"
+                 min="0" max="10" step="0.1" required>
+        </div>
+        <div id="ratingError" class="text-danger small"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="confirmRatingChange">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+
+
+{% block script %}
+    <script src="{% static "js/home.js" %}"></script>
+
+
+
+{% endblock %}

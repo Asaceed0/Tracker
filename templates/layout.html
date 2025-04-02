@@ -1,0 +1,43 @@
+
+<!-- 基础模板，免于重复写文件导入 -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% block link %}
+        单独文件导入，需要link标签
+    {% endblock %}
+
+    <link href="{% static "plugins/bootstrap-4.6.2/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/all.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/navbar.css" %}" rel="stylesheet">
+
+    {% block title %}
+    <title>标题，需要带标签</title>
+    {% endblock %}
+
+
+    {% block style %}
+        <style>"样式，需要带style标签"</style>
+    {% endblock %}
+
+</head>
+
+
+<body>
+
+{% block context %}
+页面内容，不带body标签
+{% endblock %}
+
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script src="{% static "plugins/bootstrap-4.6.2/dist/js/bootstrap.min.js" %}"></script>
+<script src="{% static "js/popper.min.js" %}"></script>
+{% block script %}
+    <script> "需要带script标签"</script>
+{% endblock %}
+
+</body>
+</html>

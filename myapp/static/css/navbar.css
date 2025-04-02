@@ -1,0 +1,95 @@
+
+/* 自定义导航条样式 */
+.custom-navbar {
+    background: rgba(0, 0, 0, 0.85) !important; /* 半透明黑色背景 */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease; /* 过渡动画 */
+}
+
+/* 滚动时变化效果 */
+.custom-navbar.scrolled {
+    background: rgba(0, 0, 0, 0.95) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 导航项悬停效果 */
+.nav-link {
+    position: relative;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* 自定义搜索框 */
+.search-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #a318a8 !important;
+
+}
+
+.search-box::placeholder {
+    color: rgba(172, 21, 122, 0.6) !important;
+}
+
+/* 移动端优化 */
+@media (max-width: 992px) {
+    .custom-navbar {
+        background: rgba(0, 0, 0, 0.95) !important;
+    }
+
+    .dropdown-menu {
+        background: rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* 用户信息块样式  避免覆盖作用*/
+.user-profile-wrapper {
+    margin-top: 80px; /* 与导航条保持间距 */
+    background: #fff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+/*用户登录头像*/
+/* 用户头像下拉菜单 */
+/* 用户头像下拉菜单 */
+.dropdown-menu {
+    background: #fff !important; /* 背景改为白色 */
+    border: 1px solid rgba(0, 0, 0, 0.15) !important; /* 边框颜色调整 */
+    min-width: 120px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影增强层次感 */
+}
+
+.dropdown-item {
+    color: #333 !important; /* 文字颜色改为深灰色 */
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background: #f8f9fa !important; /* 悬停背景改为浅灰色 */
+    color: #000 !important; /* 悬停文字颜色加深 */
+}
+
+/* 移动端优化 */
+@media (max-width: 992px) {
+    .dropdown-menu {
+        background: #fff !important; /* 保持白色背景 */
+        border-color: rgba(0, 0, 0, 0.1) !important;
+    }
+}
+/**/

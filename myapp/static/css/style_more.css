@@ -1,0 +1,653 @@
+/* 自定义CSS 用于用户首页 */
+
+/* container */
+
+
+.category-block {
+    margin-bottom: 30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    min-height: 400px; /* 保持统一高度 */
+    display: flex;
+    flex-direction: column;
+}
+
+.category-title {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.works-list {
+    flex: 1;
+    overflow-y: auto; /* 内容过多时滚动 */
+}
+
+.work-item {
+    display: flex;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.work-thumb {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.btn-more {
+    margin-top: 10px;
+    padding: 5px 20px;
+}
+
+/* 右边订阅区域样式 */
+.subscription-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subscription-list {
+    list-style: none;
+    padding: 0;
+}
+
+.subscription-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+
+/* 自定义导航条样式 */
+.custom-navbar {
+    background: rgba(0, 0, 0, 0.85) !important; /* 半透明黑色背景 */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease; /* 过渡动画 */
+}
+
+/* 滚动时变化效果 */
+.custom-navbar.scrolled {
+    background: rgba(0, 0, 0, 0.95) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 导航项悬停效果 */
+.nav-link {
+    position: relative;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* 自定义搜索框 */
+.search-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #a318a8 !important;
+
+}
+
+.search-box::placeholder {
+    color: rgba(172, 21, 122, 0.6) !important;
+}
+
+/* 移动端优化 */
+@media (max-width: 992px) {
+    .custom-navbar {
+        background: rgba(0, 0, 0, 0.95) !important;
+    }
+
+    .dropdown-menu {
+        background: rgba(0, 0, 0, 0.8);
+    }
+}
+
+
+/* 用户信息*/
+
+/* 用户信息块样式 */
+.user-profile-wrapper {
+    margin-top: 80px; /* 与导航条保持间距 */
+    background: #fff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile-card {
+    display: flex;
+    padding: 25px 15px;
+    align-items: flex-start;
+}
+
+/* 头像区域 */
+.profile-avatar {
+    position: relative;
+    flex: 0 0 120px;
+    margin-right: 30px;
+}
+
+.avatar-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-edit-avatar {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    padding: 0;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 信息区域 */
+.profile-info {
+    flex: 1;
+    min-width: 0; /* 防止flex内容溢出 */
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.username {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.btn-edit-profile {
+    background: linear-gradient(135deg, #6c5ce7, #a363d9);
+    color: white;
+    border: none;
+    padding: 8px 25px;
+    border-radius: 20px;
+    transition: transform 0.2s;
+}
+
+.btn-edit-profile:hover {
+    transform: translateY(-2px);
+}
+
+.profile-bio {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 30px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item strong {
+    display: block;
+    font-size: 1.4rem;
+    color: #333;
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .user-profile-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-avatar {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .btn-edit-profile {
+        margin-top: 10px;
+    }
+
+
+}
+
+/* 订阅数 */
+
+/* 默认状态 */
+a .subscription-text {
+  color: #000; /* 黑色 */
+  font-weight: normal; /* 正常粗细 */
+  transition: all 0.3s ease; /* 添加过渡动画 */
+}
+
+/* 悬停状态 */
+a:hover .subscription-text {
+  color: #FF4500; /* 橙红色 */
+  font-weight: bold; /* 加粗 */
+  text-shadow: 0 2px 4px rgba(255, 69, 0, 0.2); /* 可选：添加光影效果 */
+}
+
+/* 添加点击反馈 */
+a:active .subscription-text {
+  transform: translateY(1px);
+  color: #CC3300; /* 更深的红色 */
+}
+
+/* 移动端适配 */
+@media (hover: none) {
+  a .subscription-text {
+    color: #666; /* 非悬停设备使用更柔和的颜色 */
+  }
+}
+
+
+
+
+
+/*新增*/
+
+
+/*在媒体查询中添加头像按钮定位修正：*/
+@media (max-width: 768px) {
+    .btn-edit-avatar {
+        right: calc(50% - 50px); /* 居中调整 */
+    }
+}
+
+/*改为动态高度，并添加响应式适配*/
+.category-block {
+    height: auto;
+    min-height: unset;
+}
+
+
+/*悬停效果*/
+.work-item {
+    /* 原有样式保持不变 */
+    transition: all 0.3s ease; /* 添加过渡动画 */
+    position: relative; /* 为z-index定位做准备 */
+
+}
+
+.work-item:hover {
+    transform: translateY(-5px); /* 向上浮动效果 */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* 加强阴影 */
+    z-index: 1; /* 确保浮起元素覆盖其他元素 */
+}
+
+
+
+
+/* 可选：添加图片缩放效果 */
+.work-thumb {
+    transition: transform 0.3s ease;
+}
+
+.work-item:hover .work-thumb {
+    transform: scale(1.05); /* 图片轻微放大 */
+}
+
+/* 可选：文字颜色变化 */
+.work-item:hover h5 {
+    color: #6c5ce7; /* 使用主题色 */
+}
+
+
+/*变更work-item*/
+
+/* 在 style_home_test.css 中添加以下样式 */
+
+/* 基础块样式 */
+.info-block {
+    margin-bottom: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.info-block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* 评分块样式 */
+.rating-item {
+    display: flex;
+    align-items: center;
+    margin: 6px 0;
+}
+
+.stars {
+    margin-left: 10px;
+    color: #ffd700; /* 金色 */
+}
+
+.stars .fa-star {
+    margin: 0 2px;
+}
+
+.stars .active {
+    color: #ffc107; /* 激活的星星颜色 */
+}
+
+/* 进度条样式 */
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+/*.progress-bar {*/
+/*    height: 8px;*/
+/*    background: #e9ecef;*/
+/*    border-radius: 4px;*/
+/*    overflow: hidden;*/
+/*}*/
+
+
+/*不生效*/
+.progress-bar {
+    height: 8px;
+    background: #d92424; /* 白色背景 */
+    border: 1px solid #cddbef; /* 添加边框增强可视性 */
+    border-radius: 4px; /* 圆角匹配原有样式 */
+}
+
+/*.progress-fill {*/
+/*    height: 100%;*/
+/*    */
+/*    transition: width 0.3s ease;*/
+/*}*/
+
+/* 操作按钮样式 */
+.action-block {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-action {
+    padding: 5px 12px;
+    font-size: 0.85em;
+    border-radius: 15px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    transition: all 0.2s;
+}
+
+.btn-action:hover {
+    background: #c8def1;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(108, 92, 231, 0.1);
+}
+
+.btn-danger {
+    background: #fff5f5;
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+}
+
+/* 响应式调整 */
+@media (max-width: 576px) {
+    .action-block {
+        flex-direction: column;
+    }
+
+    .btn-action {
+        width: 100%;
+    }
+}
+
+.work-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*更多按钮*/
+
+/* 在 style_home_test.css 中添加/修改以下代码 */
+.btn-more {
+    /* 基础样式 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 流畅的缓动曲线 */
+    position: relative; /* 为伪元素定位准备 */
+    overflow: hidden; /* 隐藏溢出效果 */
+}
+
+.btn-more:hover {
+    /* 基础变化 */
+    background: #5c75e7f5 !important;
+    color: white !important;
+    transform: translateY(-2px);
+
+    /* 光影效果 */
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+
+    /* 箭头动画 */
+    padding-right: 35px; /* 为箭头移动留出空间 */
+}
+
+/* 箭头动态效果 */
+.btn-more:hover::after {
+    content: "»";
+    position: absolute;
+    right: 15px;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.btn-more:hover::before {
+    content: "»";
+    position: absolute;
+    right: -10px;
+    transition: all 0.3s;
+}
+
+.btn-more:hover::before {
+    right: 20px;
+    opacity: 0;
+}
+
+.btn-more:hover::after {
+    right: 15px;
+    opacity: 1;
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    .btn-more:hover {
+        transform: none; /* 移动端取消位移 */
+        padding-right: 25px;
+    }
+}
+
+
+.progress-fill {
+    height: 100%;
+    background: #5ce78a;
+    transition: width 0.5s ease; /* 添加平滑过渡 */
+}
+
+
+/*评分*/
+/* 添加以下样式 */
+.stars {
+    position: relative;
+    display: inline-block;
+}
+
+.stars-container {
+    display: inline-flex;
+    position: relative;
+}
+
+.star-base,
+.star-fill {
+    display: inline-flex;
+}
+
+/* 空心星样式 */
+.fa-star {
+    color: #e0e0e0; /* 默认灰色 */
+}
+
+/* 实心星样式 */
+.fa-star.active {
+    color: #ffc107; /* 激活的星星颜色 */
+}
+
+/* 精确填充层 */
+.star-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* 评分文字样式 */
+.rating-text {
+    margin-left: 8px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* 基础共用样式 */
+.stars-container {
+    width: 200px;
+    position: relative;
+}
+
+/* 私人评分特殊样式 */
+.private-rating .active {
+    color: #6c5ce7; /* 紫色强调个人评分 */
+}
+
+/* 大众评分特殊样式 */
+.public-rating .active {
+    color: #4CAF50; /* 绿色强调大众评分 */
+}
+
+/* 文字标签样式 */
+.rating-text {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.private-rating .rating-text {
+    margin-left: 20px;
+    color: #6c5ce7;
+}
+
+.public-rating .rating-text {
+    margin-left: 20px;
+    color: #4CAF50;
+}
+
+/*按钮*/
+/* 修改 action-block 的布局 */
+.action-block {
+  display: flex;
+  justify-content: flex-end; /* 主轴向右侧对齐 */
+  gap: 12px; /* 按钮间距 */
+  padding: 8px 0; /* 保持原有内边距 */
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .action-block {
+    flex-direction: row; /* 保持横向排列 */
+    justify-content: flex-end; /* 仍然靠右 */
+    flex-wrap: wrap; /* 允许换行 */
+  }
+
+  .btn-action {
+    margin: 4px; /* 添加微小间距 */
+    flex-shrink: 0; /* 防止按钮被压缩 */
+  }
+}
+
+/* 超大屏幕优化 */
+@media (min-width: 1200px) {
+  .action-block {
+    gap: 20px; /* 增大间距 */
+  }
+}
+
+
+/* 分页样式 */
+.pagination {
+    margin: 20px 0;
+}
+
+.page-item .page-link {
+    border: 1px solid #dee2e6;
+    margin: 0 4px;
+    border-radius: 4px !important;
+    color: #6c5ce7;
+    transition: all 0.3s ease;
+}
+
+.page-item.active .page-link {
+    background: #6c5ce7;
+    border-color: #6c5ce7;
+    color: white;
+}
+
+.page-link:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(108, 92, 231, 0.15);
+}
+
+.page-link:focus {
+    box-shadow: none;
+}
+
+/* 移动端优化 */
+@media (max-width: 576px) {
+    .page-item .page-link {
+        margin: 0 2px;
+        padding: 6px 12px;
+    }
+}
+
+
+
+
+
+
+
+

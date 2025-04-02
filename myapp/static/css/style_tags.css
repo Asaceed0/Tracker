@@ -1,0 +1,42 @@
+/* style_tags.css */
+.tag-cloud {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.2rem;
+    padding: 20px 0;
+}
+
+.tag-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: #fff;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    color: #6c757d;
+    text-decoration: none !important;
+}
+
+.tag-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    color: #ff4500 !important;
+    font-weight: 700;
+}
+
+.tag-item .badge {
+    background-color: #6f42c1;
+    font-size: 0.8rem;
+    transition: background 0.3s;
+}
+
+.tag-item:hover .badge {
+    background-color: #ff4500;
+}
+
+@media (max-width: 768px) {
+    .tag-cloud {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}

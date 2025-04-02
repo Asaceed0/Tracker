@@ -1,0 +1,230 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{% block title %}
+    <title>个人首页</title>
+{% endblock %}
+
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/style_home_test.css' %}">
+
+
+
+{% endblock %}
+
+
+{% block context %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom-navbar">
+        <div class="container"> <!-- 保持与内容容器宽度一致 -->
+            <!-- 品牌Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                作品平台
+            </a>
+
+            <!-- 汉堡菜单按钮（移动端显示） -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- 导航项 -->
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav mr-auto">
+                    <!-- 带下拉菜单的导航项 -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button"
+                           data-toggle="dropdown">
+                            作品分类
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#anime">动漫</a>
+                            <a class="dropdown-item" href="#novel">小说</a>
+                            <a class="dropdown-item" href="#game">游戏</a>
+                        </div>
+                    </li>
+
+                    <!-- 普通导航项 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#new">最新作品</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#rank">排行榜</a>
+                    </li>
+                </ul>
+
+                <!-- 右侧功能区 -->
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control search-box" type="search" placeholder="搜索作品...">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">搜索</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="user-profile-wrapper">
+        <div class="container"><!-- 使用相同container保证对齐 -->
+            <div class="user-profile-card">
+                <!-- 左侧头像 -->
+                <div class="profile-avatar">
+                    <img src="{{ user_details.photo_url }}" class="avatar-img">
+                    <button class="btn btn-edit-avatar">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+
+                <!-- 右侧信息 -->
+                <div class="profile-info">
+                    <div class="profile-header">
+                        <h2 class="username">{{ user_details.username }}
+                            <span class="badge badge-pill badge-info">{{ user_details.gender }}</span>
+                        </h2>
+                        <button class="btn btn-edit-profile">编辑资料</button>
+                    </div>
+
+                    <p class="profile-bio">{{ user_details.resume }}</p>
+
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <a href="" class="subscription-link">
+                                <strong>{{ user_details.animes_like }}</strong>
+                                <span class="subscription-text">订阅动漫</span>
+                            </a>
+                        </div>
+                        <div class="stat-item">
+                            <a href="" class="subscription-link">
+                                <strong>{{ user_details.books_like }}</strong>
+                                <span class="subscription-text">订阅书籍</span>
+                            </a>
+
+                        </div>
+                        <div class="stat-item">
+                            <a href="" class="subscription-link">
+                                <strong>{{ user_details.games_like }}</strong>
+                                <span class="subscription-text">订阅游戏</span>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" style="margin-top: 10px">
+            <!-- 左边作品列表 -->
+            <div class="col-md-8">
+                <!-- 分类块容器 -->
+                <div class="category-container">
+                    <!-- 单个分类块 -->
+                    <div class="category-block">
+                        <h3 class="category-title">动漫 <span class="badge badge-secondary">6</span></h3>
+                        <div class="works-list">
+
+                            <!-- 更多作品项... -->
+                            {% for item in items_anime %}
+                                <div class="work-item">
+                                    <a href="{{ item.anime.info_url }}"><img src="{{ item.anime.img_url }}"
+                                                                             class="work-thumb"></a>
+                                    <div class="work-info">
+                                        <!-- 标题块 -->
+                                        <div class="info-block title-block">
+                                            <a href="{{ item.anime.info_url }}"><h5>{{ item.anime.anime_name }}</h5></a>
+                                            <p class="text-muted">{{ item.anime.resume }}</p>
+                                        </div>
+
+                                        <!-- 评分块 -->
+                                        <div class="info-block rating-block">
+                                            <!-- 私人评分块 -->
+                                            <div class="rating-item private-rating">
+                                                <span>个人评分：</span>
+                                                <div class="stars" data-rating="{{ item.score_user }}" data-total="10">
+                                                    <div class="stars-container"></div>
+                                                    <span class="rating-text">8.5</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- 大众评分块 -->
+                                            <div class="rating-item public-rating">
+                                                <span>大众评分：</span>
+                                                <div class="stars" data-rating="{{ item.anime.score }}" data-total="10">
+                                                    <div class="stars-container"></div>
+                                                    <span class="rating-text">7.3</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 进度块 -->
+                                        <div class="info-block progress-block" data-step="{{ item.step }}"
+                                             data-total="{{ item.anime.total }}">
+                                            <div class="progress-label">
+                                                <span>观看进度</span>
+                                                <span class="progress-percent"></span>
+                                            </div>
+                                            <div class="progress-bar">
+
+                                                <div class="progress-fill" style="width: 100%">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 操作块 -->
+                                        <div class="info-block action-block">
+                                            <button class="btn btn-action">修改进度</button>
+                                            <button class="btn btn-action">修改评分</button>
+                                            <button class="btn btn-action btn-danger">删除订阅</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                        <div class="text-right">
+                            <a href="#" class="btn btn-more">更多 »</a>
+                        </div>
+                    </div>
+
+                    <!-- 小说分类块 -->
+                    <div class="category-block">
+                        <!-- 结构同上 -->
+                    </div>
+
+                    <!-- 游戏分类块 -->
+                    <div class="category-block">
+                        <!-- 结构同上 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右边订阅信息 -->
+            <div class="col-md-4">
+                <div class="subscription-box">
+                    <h4 class="side-title">最近订阅</h4>
+                    <ul class="subscription-list">
+                        {% for record in recently_record %}
+                            <li class="subscription-item">
+                                <a href="{{ record.info_url }}">
+                                    <span class="work-name">{{ record.anime_name }}</span>
+                                    <span class="subscribe-date">{{ record.record_date }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+
+
+                        <!-- 更多订阅项... -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+{% block script %}
+    <script src="{% static "js/home_test.js" %}"></script>
+
+
+{% endblock %}

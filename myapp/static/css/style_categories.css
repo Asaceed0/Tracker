@@ -1,0 +1,80 @@
+/*导航以及占位*/
+
+/*导航条*/
+
+
+
+
+
+
+
+
+
+/* 排序按钮样式 */
+#sortSelector {
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+
+#sortSelector .sort-btn {
+  background: #f8f9fa;
+  color: #6c757d;
+  border: none;
+  font-weight: normal;
+  transition: all 0.3s ease;
+}
+
+#sortSelector .sort-btn.active {
+  background: #28a745 !important;
+  color: white !important;
+  font-weight: bold;
+  position: relative;
+  box-shadow: 0 0 0 2px rgba(40,167,69,.5);
+}
+
+/* 作品列表样式 */
+.work-list {
+  list-style: none;
+  padding: 0;
+}
+
+.work-item {
+  display: flex;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.work-image {
+  width: 120px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 1.5rem;
+}
+
+.work-content {
+  flex: 1;
+}
+
+.work-title {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.work-desc {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* 新增排序按钮激活状态样式 */
+.sort-btn.active {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: white !important;
+}
+
+

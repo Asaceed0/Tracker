@@ -1,0 +1,221 @@
+
+
+
+/*导航条*/
+
+/* 自定义导航条样式 */
+.custom-navbar {
+    background: rgba(0, 0, 0, 0.85) !important; /* 半透明黑色背景 */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease; /* 过渡动画 */
+}
+
+/* 滚动时变化效果 */
+.custom-navbar.scrolled {
+    background: rgba(0, 0, 0, 0.95) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 导航项悬停效果 */
+.nav-link {
+    position: relative;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* 自定义搜索框 */
+.search-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #a318a8 !important;
+
+}
+
+.search-box::placeholder {
+    color: rgba(172, 21, 122, 0.6) !important;
+}
+
+/* 移动端优化 */
+@media (max-width: 992px) {
+    .custom-navbar {
+        background: rgba(0, 0, 0, 0.95) !important;
+    }
+
+    .dropdown-menu {
+        background: rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* 用户信息块样式  避免覆盖作用*/
+.user-profile-wrapper {
+    margin-top: 80px; /* 与导航条保持间距 */
+    background: #fff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+.info_block_1 {
+  max-width: 350px; /* 控制左侧最大宽度 */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.other_data li {
+  transition: background-color 0.2s;
+}
+
+.other_data li:hover {
+  background-color: rgba(0,0,0,0.03);
+}
+
+.line-height-lg {
+  line-height: 1.7;
+}
+
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075)!important;
+}
+
+
+
+/*标签tags*/
+
+/* 标签样式 */
+.tag-item {
+    transition: all 0.2s ease;
+    cursor: default;
+    color: #333;
+    font-size: 0.9rem;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* 悬停效果 */
+.tag-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+    color: #ff4500 !important;
+    font-weight: bold;
+}
+
+
+
+/*评分*/
+/* 评分星星样式（与 more.html 一致） */
+.stars {
+    position: relative;
+    display: inline-block;
+}
+
+.stars-container {
+    display: inline-flex;
+    position: relative;
+    width: 200px;
+}
+
+.star-base,
+.star-fill {
+    display: inline-flex;
+    gap: 2px;
+}
+
+/* 空心星样式 */
+.star-base .fa-star {
+    color: #e0e0e0;
+}
+
+/* 实心星样式 */
+.star-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.star-fill .fa-star {
+    color: #ffd700; /* 黄色填充 */
+    background: linear-gradient(90deg, #FFD700 50%, #FF69B4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 文字样式 */
+.rating-text {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.public-text { color: #4CAF50; } /* 大众评分绿色 */
+.user-text { color: #6c5ce7; }    /* 私人评分紫色 */
+
+
+
+
+/*进度*/
+/* 进度条样式（与 more.html 一致） */
+.progress-block {
+    margin-bottom: 1.5rem;
+}
+
+.progress-label {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #4CAF50; /* 填充颜色 */
+    transition: width 0.5s ease;
+    border-radius: 5px;
+}
+
+
+
+
+/* 相似推荐样式 */
+.similar-recommend li {
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transform-origin: center center;
+    overflow: hidden; /* 防止子元素溢出圆角 */
+}
+
+/* 悬停效果：浮起 + 放大 */
+.similar-recommend li:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
+}
+
+/* 图片悬停缩放 */
+.similar-recommend li img {
+    transition: transform 0.3s ease;
+}
+
+.similar-recommend li:hover img {
+    transform: scale(1.05);
+}
